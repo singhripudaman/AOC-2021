@@ -17,61 +17,46 @@ answer = 0
 for tup in lis:
     left, right = tup
     temp = left.split()
-    zero = one = two = three = four = five = six = seven = eight = nine = ""
+    dic = {}
+    for i in range(10):
+        dic[i] = ""
 
     for word in temp:
         length = len(word)
         if length == 4:
-            four = word
+            dic[4] = word
         if length == 7:
-            eight = word
+            dic[8] = word
         if length == 2:
-            one = word
+            dic[1] = word
         if length == 3:
-            seven = word
+            dic[7] = word
 
     for word in temp:
         length = len(word)
         if length == 6:
-            if countCommon(four, word) == 4:
-                nine = word
-            elif countCommon(seven, word) == 3:
-                zero = word
+            if countCommon(dic[4], word) == 4:
+                dic[9] = word
+            elif countCommon(dic[7], word) == 3:
+                dic[0] = word
             else:
-                six = word
+                dic[6] = word
         elif length == 5:
-            if countCommon(seven, word) == 3:
-                three = word
-            elif countCommon(four, word) == 3:
-                five = word
+            if countCommon(dic[7], word) == 3:
+                dic[3] = word
+            elif countCommon(dic[4], word) == 3:
+                dic[5] = word
             else:
-                two = word
+                dic[2] = word
+
 
     temp = right.split()
     data = ""
 
     for word in temp:
-        word = sorted(word)
-        if word == sorted(zero):
-            data += "0"
-        elif word == sorted(one):
-            data += "1"
-        elif word == sorted(two):
-            data += "2"
-        elif word == sorted(three):
-            data += "3"
-        elif word == sorted(four):
-            data += "4"
-        elif word == sorted(five):
-            data += "5"
-        elif word == sorted(six):
-            data += "6"
-        elif word == sorted(seven):
-            data += "7"
-        elif word == sorted(eight):
-            data += "8"
-        elif word == sorted(nine):
-            data += "9"
+        for key, value in dic.items():
+            if sorted(word) == sorted(value):
+                data += str(key)
     answer += int(data)
 
 print(answer)
